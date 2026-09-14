@@ -1,0 +1,60 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Real permissions this app actually needs and will prompt for -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="CallCheck"
+        android:theme="@style/Theme.CallCheck"
+        android:usesCleartextTraffic="false">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+          Real Android API: lets this app see incoming numbers BEFORE they're
+          answered and allow/block/silence them. It does NOT expose call audio —
+          that's an OS restriction, not something we can code around.
+          To receive calls here the user must enable this app under
+          Settings > Apps > Default apps > Caller ID & spam blocking.
+        -->
+        <service
+            android:name=".callscreen.CallCheckScreeningService"
+            android:permission="android.permission.BIND_SCREENING_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.telecom.CallScreeningService" />
+            </intent-filter>
+        </service>
+
+        <!--
+          Foreground service used ONLY for the opt-in, disclosed,
+          speakerphone-based voice check (see VoiceCheckService.kt for the
+          real limitations of this approach).
+        -->
+        <service
+            android:name=".callscreen.VoiceCheckService"
+            android:foregroundServiceType="microphone"
+            android:exported="false" />
+
+    </application>
+</manifest>
