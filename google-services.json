@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "218290869001",
+    "project_id": "papp-b5028",
+    "storage_bucket": "papp-b5028.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218290869001:android:e7d43bed292c1b3f14f9d8",
+        "android_client_info": {
+          "package_name": "com.callcheck.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzvsQljk9S1IP_KC96LD0CBlphCJQDP70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
